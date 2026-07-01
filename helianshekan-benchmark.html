@@ -350,18 +350,18 @@ sup a:hover { text-decoration: underline; }
   <figure class="diagram">
     <pre class="mermaid">
 flowchart LR
-    subgraph 医院 space agent
+    subgraph S1["医院 Space Agent"]
         A1[数字孪生引擎]
         A2[AI能耗大脑]
         A3[预测性运维]
         A4[应急指挥联动]
     end
 
-    subgraph 社区 health space agent
+    subgraph S2["社区 Health Space Agent"]
         B1[社区健康数字孪生]
         B2[社康智能空间管理]
-        B3[设备预测维护 + 居民健康预警]
-        B4[公卫应急联动 + 疾控预警]
+        B3[设备预测维护+居民健康预警]
+        B4[公卫应急联动+疾控预警]
     end
 
     A1 -->|能力下沉| B1
