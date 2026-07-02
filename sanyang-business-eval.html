@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>三方互通数字健康项目 · 商业全面评估</title>
+<style>
+:root {
+  --bg: #0f1419;
+  --bg2: #1a2332;
+  --bg3: #243447;
+  --ink: #e8eef5;
+  --muted: #8ba3c7;
+  --rule: #2d4055;
+  --accent: #00d4aa;
+  --accent2: #4a9eff;
+  --warn: #ff8c42;
+  --danger: #ff4757;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, 'PingFang SC', 'Noto Sans CJK SC', 'Microsoft YaHei', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.8;
+  font-size: 16px;
+}
+.container { max-width: 960px; margin: 0 auto; padding: 0 1.5rem; }
+.hero {
+  padding: 4rem 0 3rem;
+  text-align: center;
+  background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
+  border-bottom: 1px solid var(--rule);
+}
+.hero .tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  padding: 2px 10px;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.08em;
+}
+.hero h1 { font-size: 2.2rem; font-weight: 700; line-height: 1.3; margin-bottom: 1rem; }
+.hero .subtitle { font-size: 1.1rem; color: var(--muted); max-width: 700px; margin: 0 auto; }
+section { padding: 2.5rem 0; border-bottom: 1px solid var(--rule); }
+section:last-of-type { border-bottom: none; }
+h2 { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--ink); }
+h2 .num { font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 0.3rem; }
+h3 { font-size: 1.2rem; font-weight: 700; color: var(--accent2); margin: 1.5rem 0 0.75rem; }
+h4 { font-size: 1.05rem; font-weight: 700; color: var(--ink); margin: 1.2rem 0 0.5rem; }
+p { margin-bottom: 1rem; }
+.lead { font-size: 1.05rem; color: var(--muted); margin-bottom: 1.5rem; }
+
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 1.5rem 0; }
+.card {
+  background: var(--bg2);
+  border-radius: 8px;
+  padding: 1.5rem;
+  border: 1px solid var(--rule);
+}
+.card .icon { font-size: 0.7rem; color: var(--accent); margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+.card h4 { margin: 0 0 0.5rem; font-size: 1.05rem; }
+.card p { font-size: 0.9rem; color: var(--muted); margin: 0; }
+.card .tag2 { display: inline-block; font-size: 0.7rem; padding: 2px 8px; border-radius: 3px; margin-top: 0.5rem; }
+.tag2.r { background: rgba(255,71,87,0.15); color: var(--danger); border: 1px solid var(--danger); }
+.tag2.y { background: rgba(255,140,66,0.15); color: var(--warn); border: 1px solid var(--warn); }
+.tag2.g { background: rgba(0,212,170,0.15); color: var(--accent); border: 1px solid var(--accent); }
+.tag2.b { background: rgba(74,158,255,0.15); color: var(--accent2); border: 1px solid var(--accent2); }
+
+.table-wrap { overflow-x: auto; margin: 1.5rem 0; border-radius: 8px; border: 1px solid var(--rule); }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+th { background: var(--bg3); color: var(--accent); font-weight: 700; text-align: left; padding: 0.75rem 1rem; position: sticky; top: 0; white-space: nowrap; }
+td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--rule); color: var(--ink); vertical-align: top; }
+tr:hover td { background: var(--bg2); }
+
+.callout {
+  background: var(--bg2);
+  border-left: 4px solid var(--accent2);
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 8px 8px 0;
+}
+.callout.red { border-left-color: var(--danger); }
+.callout.warn { border-left-color: var(--warn); }
+.callout p { margin: 0; }
+.callout p + p { margin-top: 0.5rem; }
+
+ul { margin: 1rem 0; padding-left: 1.5rem; }
+li { margin-bottom: 0.5rem; }
+mark.key { background: none; color: var(--accent); font-weight: 600; }
+mark.red { background: none; color: var(--danger); font-weight: 600; }
+mark.warn { background: none; color: var(--warn); font-weight: 600; }
+mark.blue { background: none; color: var(--accent2); font-weight: 600; }
+strong { color: var(--ink); }
+
+.money { color: var(--accent); font-weight: 700; font-family: 'Courier New', monospace; }
+
+footer { padding: 2rem 0; border-top: 1px solid var(--rule); text-align: center; color: var(--muted); font-size: 0.85rem; }
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 1.7rem; }
+  .card-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="container">
+    <div class="tag">BUSINESS EVALUATION · 2026.07.02</div>
+    <h1>三方互通数字健康项目 · 商业全面评估</h1>
+    <p class="subtitle">基于狄鸿智创全栈能力（底座+应用+运营），以赚钱为第一优先级，逐场景拆解商业模式、定价策略和风险规避方案</p>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- TL;DR -->
+<div class="callout">
+  <p><strong>核心结论：</strong>杨瑶的五个场景+科普屋，全部可以由狄鸿智创承建并赚钱。<mark class="key">总盘子约 80-150 万（一次性建设）+ 15-25 万/年（运营维护）</mark>。不需要纠结"只做底座不做应用"——政府社康项目从甲方角度看，需要的就是一个能"交钥匙"的解决方案提供商。</p>
+  <p>赚钱优先级：<strong>科普屋（最快变现）> 三方数据互通（最大金额）> 志愿积分+文体测评（增值模块）> 健康就业适配（差异化卖点但需规避）</strong>。</p>
+  <p>合规风险全部可规避，关键是用<mark class="key">"分层架构 + 数据不出域 + 用户授权链"</mark>三把刀解决。</p>
+</div>
+
+<!-- Section 1: 重新定位 -->
+<section>
+  <h2><span class="num">01</span>狄鸿智创的角色重新定位</h2>
+  <p class="lead">不设限。能赚钱的业务都可以干。以甲方（街道/社康）视角看，他们需要的是一个"交钥匙"方案，不是一堆底层组件。</p>
+
+  <h3>1.1 从"使能方"到"全栈服务商"</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>能力层次</th><th>狄鸿能做什么</th><th>赚钱方式</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>硬件层</strong></td>
+          <td>科普屋鸿蒙平板/触控一体机、碰一碰签到设备、党员服务中心信息屏、社康大屏</td>
+          <td>硬件销售（利润率 30-40%）+ 维保合同</td>
+        </tr>
+        <tr>
+          <td><strong>平台层</strong></td>
+          <td>三方数据互通平台、积分管理系统、健康自测评估引擎、数据融合引擎</td>
+          <td>平台开发费（核心收入）+ 定制开发</td>
+        </tr>
+        <tr>
+          <td><strong>应用层</strong></td>
+          <td>科普互动游戏（5个）、志愿积分小程序、社团管理后台、就业适配评估工具</td>
+          <td>应用开发费 + 内容定制费</td>
+        </tr>
+        <tr>
+          <td><strong>运营层</strong></td>
+          <td>系统运维、数据安全审计、内容更新（科普游戏新关卡）、季度运营报告</td>
+          <td>年费制运营合同（现金流最好的部分）</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>1.2 对甲方的故事怎么讲</h3>
+  <p>杨瑶主任的甲方是景乐社区/街道。他们关心的不是"鸿蒙底座"或"空间智能体"，而是：</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="icon">甲方视角 1</div>
+      <h4>帮我把事干成</h4>
+      <p>三方互通这个事，景乐街道想做但没技术能力。狄鸿就是"帮街道把这个事落地"的执行方。</p>
+    </div>
+    <div class="card">
+      <div class="icon">甲方视角 2</div>
+      <h4>帮我要到预算</h4>
+      <p>包装成"人口高质量发展基层健康治理数字化"项目，对接街道民生数字化+社康信息化+残联助残三笔预算。</p>
+    </div>
+    <div class="card">
+      <div class="icon">甲方视角 3</div>
+      <h4>帮我对上汇报</h4>
+      <p>科普屋可以参观，三方数据大屏可以展示，数字档案可以汇报。所有产出都是领导看得见的东西。</p>
+    </div>
+  </div>
+</section>
+
+<!-- Section 2: 逐场景赚钱分析 -->
+<section>
+  <h2><span class="num">02</span>逐场景赚钱分析（按赚钱优先级排序）</h2>
+  <p class="lead">不是按文档顺序排，而是按"谁最快能签单、谁金额最大、谁最有利润"排。</p>
+
+  <!-- 场景A: 科普屋 -->
+  <h3>A. 科普屋 — 最好签单、最快交付、可标准化复制</h3>
+
+  <div class="callout">
+    <p><strong>赚钱逻辑：</strong>科普屋是一个独立的"产品化"交付物——硬件（鸿蒙触控一体机）+ 软件（5个互动游戏）+ 部署服务。甲方看得见、摸得着、容易审批。</p>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>收入项</th><th>金额</th><th>说明</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>鸿蒙触控一体机</td>
+          <td class="money">3-5万/台</td>
+          <td>采购狄耐克或合作伙伴的鸿蒙触控一体机，可配2-3台</td>
+        </tr>
+        <tr>
+          <td>科普互动游戏开发</td>
+          <td class="money">8-15万</td>
+          <td>5个游戏（刷牙、洗手、护眼、血压、低糖），含UI设计+内容制作+数据后台</td>
+        </tr>
+        <tr>
+          <td>部署调试+培训</td>
+          <td class="money">2-3万</td>
+          <td>现场安装、网络调试、社康工作人员操作培训</td>
+        </tr>
+        <tr>
+          <td style="background:var(--bg3);color:var(--accent);font-weight:700">小计</td>
+          <td style="background:var(--bg3);color:var(--accent);font-weight:700" class="money">15-25万</td>
+          <td style="background:var(--bg3)">独立可签单，不依赖其他场景</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="icon">WHY FAST</div>
+      <h4>为什么最好签单</h4>
+      <p>不涉及跨机构数据、不涉及健康隐私、不涉及三方协调。社康或党群自己就能拍板，预算3-5万就能起步。</p>
+      <span class="tag2 g">最快签约</span>
+    </div>
+    <div class="card">
+      <div class="icon">WHY SCALE</div>
+      <h4>为什么可复制</h4>
+      <p>做成标准产品后，深圳1000家社康+社区党群中心都是潜在客户。"健康科普角"可以成为狄鸿的一个产品线。</p>
+      <span class="tag2 b">标准化产品</span>
+    </div>
+  </div>
+
+  <p><strong>风险规避：</strong>科普屋几乎零合规风险——纯健康教育内容，不涉及个人数据采集。如果要加用户注册/积分功能，才需要走隐私合规。</p>
+
+  <!-- 场景B: 三方数据互通 -->
+  <h3>B. 三方数据互通 — 最大金额、最长周期、核心壁垒</h3>
+
+  <div class="callout warn">
+    <p><strong>赚钱逻辑：</strong>这是整个项目的大头——跨三方的数据平台建设，包含系统集成、数据标准化、主数据管理、安全审计等。金额最大，周期最长，也是狄鸿最核心的技术壁垒。</p>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>收入项</th><th>金额</th><th>说明</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>三方数据互通平台</td>
+          <td class="money">25-40万</td>
+          <td>统一身份认证、主数据管理、数据标准映射、跨机构数据同步引擎</td>
+        </tr>
+        <tr>
+          <td>社康数据对接</td>
+          <td class="money">8-12万</td>
+          <td>对接龙华家医平台/HIS，提取健康档案、体检、慢病数据</td>
+        </tr>
+        <tr>
+          <td>党群端数字化模块</td>
+          <td class="money">10-15万</td>
+          <td>如果党群没有系统，需要新建基础管理模块（就业、社团、帮扶台账）</td>
+        </tr>
+        <tr>
+          <td>雨燕助残端系统</td>
+          <td class="money">8-12万</td>
+          <td>助残端信息化建设（技能培训、居家就业、康复诉求管理）</td>
+        </tr>
+        <tr>
+          <td>数据安全中间件</td>
+          <td class="money">5-8万</td>
+          <td>数据脱敏、访问审计、加密传输、合规日志</td>
+        </tr>
+        <tr>
+          <td>驾驶舱大屏</td>
+          <td class="money">8-12万</td>
+          <td>三方数据可视化驾驶舱，领导参观/汇报用（可复用空间智能体驾驶舱）</td>
+        </tr>
+        <tr>
+          <td style="background:var(--bg3);color:var(--accent);font-weight:700">小计</td>
+          <td style="background:var(--bg3);color:var(--accent);font-weight:700" class="money">64-99万</td>
+          <td style="background:var(--bg3)">整个项目的核心，也是最大收入来源</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>合规风险规避方案</h4>
+  <p>上一版分析中指出的合规风险，全部有解法：</p>
+  <ul>
+    <li><strong>数据共享协议：</strong>狄鸿不介入三方之间的数据权责谈判——这应该是街道/社康层面签署的行政协议。狄鸿提供的是<mark class="key">技术实现</mark>，不是法律主体。在方案中明确列出"甲方需事先完成三方数据共享协议签署"，作为项目前提条件。</li>
+    <li><strong>知情同意升级：</strong>设计系统时，内置"居民授权管理"模块。居民在社康建档时勾选"同意数据共享至三方互通平台"，系统记录授权状态。没有授权的数据不参与互通。<mark class="key">技术解决合规</mark>——把合规要求做成系统功能。</li>
+    <li><strong>数据分类分级：</strong>平台内置三级数据分类：公开数据（社团活动信息）、内部数据（帮扶台账，脱敏后共享）、敏感数据（健康档案，不出域，只输出结论）。技术上通过API网关+字段级权限控制实现。</li>
+    <li><strong>数据脱敏：</strong>跨机构传输的数据全部经过脱敏引擎处理——去除姓名、身份证号、详细地址，用唯一标识符替代。原始数据留在各自系统内。</li>
+  </ul>
+
+  <div class="callout">
+    <p><strong>合规规避的关键心法：</strong>合规风险不是"不做"的理由，而是<mark class="key">"写在方案里的必要前提条件"</mark>。甲方要签合同，狄鸿出具合规清单——"以下合规事项由甲方负责落实，技术实现由乙方负责"。责任边界清楚，狄鸿不背锅。</p>
+  </div>
+
+  <!-- 场景C: 志愿积分 -->
+  <h3>C. 志愿积分系统 — 增值模块、独立可签</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>收入项</th><th>金额</th><th>说明</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>积分管理平台</td>
+          <td class="money">8-12万</td>
+          <td>积分账本、发放规则、兑换商城、数据统计</td>
+        </tr>
+        <tr>
+          <td>碰一碰签到设备</td>
+          <td class="money">2-4万</td>
+          <td>鸿蒙NFC签到设备，安装在党群活动室/助残中心</td>
+        </tr>
+        <tr>
+          <td>兑换服务对接</td>
+          <td class="money">3-5万</td>
+          <td>对接社康服务资源（体检、理疗等），建立兑换流程</td>
+        </tr>
+        <tr>
+          <td style="background:var(--bg3);color:var(--accent);font-weight:700">小计</td>
+          <td style="background:var(--bg3);color:var(--accent);font-weight:700" class="money">13-21万</td>
+          <td style="background:var(--bg3)">可独立于三方互通单独签单</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><strong>赚钱加分项：</strong>积分系统可以做成<strong>SaaS产品</strong>——不只服务景乐一个社区，其他街道的志愿者管理也可以用。"鸿蒙碰一碰+志愿积分"可以包装成标准产品。</p>
+
+  <!-- 场景D: 文体健康测评 -->
+  <h3>D. 文体社团健康测评 — 增值模块</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>收入项</th><th>金额</th><th>说明</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>健康自测小程序</td>
+          <td class="money">5-8万</td>
+          <td>心率、关节、慢病自测问卷+结果生成</td>
+        </tr>
+        <tr>
+          <td>运动方案推荐引擎</td>
+          <td class="money">5-8万</td>
+          <td>基于自测结果生成适配运动方案，含中医拉伸课程内容</td>
+        </tr>
+        <tr>
+          <td style="background:var(--bg3);color:var(--accent);font-weight:700">小计</td>
+          <td style="background:var(--bg3);color:var(--accent);font-weight:700" class="money">10-16万</td>
+          <td style="background:var(--bg3)">与科普屋或积分系统打包更有性价比</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 场景E: 健康就业适配 -->
+  <h3>E. 健康筛查前置就业 — 风险最高但差异化最强</h3>
+
+  <div class="callout red">
+    <p><strong>这个场景怎么干：</strong>上一版分析认为"风险高建议放最后"。但从赚钱角度，这个场景恰恰是<mark class="key">最有差异化和故事性的</mark>。关键是重新设计业务流程来规避法律风险。</p>
+  </div>
+
+  <h4>规避方案：从"筛选"改为"赋能"</h4>
+  <p>原表述："健康筛查因人定岗，规避用工伤病风险"——这暗示基于健康结果排除某些岗位，构成就业歧视。</p>
+  <p><strong>修改为：</strong>"健康能力评估+岗位适配建议"——不是"你不能做什么"，而是"你适合做什么，以及如何通过康复训练拓宽你的可就业范围"。</p>
+
+  <ul>
+    <li><strong>定位转换：</strong>从"排除风险"改为"赋能就业"。系统不只输出"不建议高强度岗位"，更输出"建议以下岗位+配套康复训练计划"。</li>
+    <li><strong>用户选择权：</strong>评估结果仅供参考，学员有最终选择权。系统提示"以上为健康建议，您可根据自身情况选择岗位"。这一句话就把法律责任从系统转回个人意愿。</li>
+    <li><strong>数据不出域：</strong>利用鸿蒙端侧AI，健康筛查数据留在社康，只输出"适合/需评估/不建议"三级结论+具体岗位建议。不传输原始健康数据给雨燕助残。</li>
+    <li><strong>医学标准背书：</strong>评估规则库需有社康医生的审核签章。不是"AI决定你能做什么"，而是"医生基于AI辅助评估给出建议"。</li>
+  </ul>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>收入项</th><th>金额</th><th>说明</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>健康评估规则引擎</td>
+          <td class="money">8-12万</td>
+          <td>基于医学标准的岗位-健康适配规则库（需医生审核）</td>
+        </tr>
+        <tr>
+          <td>端侧AI推理模块</td>
+          <td class="money">5-8万</td>
+          <td>鸿蒙端侧隐私计算，数据不出域</td>
+        </tr>
+        <tr>
+          <td>康复训练方案库</td>
+          <td class="money">3-5万</td>
+          <td>针对不同评估结果的康复训练视频/指导方案</td>
+        </tr>
+        <tr>
+          <td style="background:var(--bg3);color:var(--accent);font-weight:700">小计</td>
+          <td style="background:var(--bg3);color:var(--accent);font-weight:700" class="money">16-25万</td>
+          <td style="background:var(--bg3)">差异化卖点，讲故事用</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="icon">STORYTELLING</div>
+      <h4>为什么值得做</h4>
+      <p>"AI+隐私计算+残障人士就业赋能"——这是领导最爱听的叙事。全国首创，有新闻价值，对申报示范项目加分。</p>
+      <span class="tag2 b">强故事性</span>
+    </div>
+    <div class="card">
+      <div class="icon">DEFENSIBLE</div>
+      <h4>为什么有壁垒</h4>
+      <p>端侧AI隐私计算+医学评估规则库是真正的技术壁垒。竞品想做也来不及。</p>
+      <span class="tag2 g">高壁垒</span>
+    </div>
+  </div>
+</section>
+
+<!-- Section 3: 总盘子 -->
+<section>
+  <h2><span class="num">03</span>总盘子与签约策略</h2>
+
+  <h3>3.1 收入总盘子</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>场景</th><th>一次性建设</th><th>年运营费</th><th>签约难度</th><th>建议优先级</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>A. 科普屋</strong></td>
+          <td class="money">15-25万</td>
+          <td class="money">2-3万</td>
+          <td style="color:var(--accent)">极低</td>
+          <td><span class="tag2 g">P0 立即签</span></td>
+        </tr>
+        <tr>
+          <td><strong>B. 三方数据互通</strong></td>
+          <td class="money">64-99万</td>
+          <td class="money">8-12万</td>
+          <td style="color:var(--warn)">中</td>
+          <td><span class="tag2 y">P1 核心推进</span></td>
+        </tr>
+        <tr>
+          <td><strong>C. 志愿积分</strong></td>
+          <td class="money">13-21万</td>
+          <td class="money">2-3万</td>
+          <td style="color:var(--accent)">低</td>
+          <td><span class="tag2 y">P1 可与A打包</span></td>
+        </tr>
+        <tr>
+          <td><strong>D. 文体测评</strong></td>
+          <td class="money">10-16万</td>
+          <td class="money">1-2万</td>
+          <td style="color:var(--accent)">低</td>
+          <td><span class="tag2 y">P2 打包增值</span></td>
+        </tr>
+        <tr>
+          <td><strong>E. 健康就业适配</strong></td>
+          <td class="money">16-25万</td>
+          <td class="money">2-3万</td>
+          <td style="color:var(--warn)">中高</td>
+          <td><span class="tag2 r">P3 差异化选做</span></td>
+        </tr>
+        <tr style="background:var(--bg3)">
+          <td style="font-weight:700;color:var(--accent)">合计</td>
+          <td style="font-weight:700;color:var(--accent)" class="money">118-186万</td>
+          <td style="font-weight:700;color:var(--accent)" class="money">15-23万/年</td>
+          <td colspan="2"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>3.2 签约策略：不一口吃，分阶段签</h3>
+
+  <div class="callout">
+    <p><strong>第一单（最快1周内可签）：</strong>科普屋 + 志愿积分打包。<mark class="key">金额 28-46万</mark>。不涉及三方协调，社康/党群自己可拍板。科普屋交付周期短，1-2个月就能验收，建立信任。</p>
+    <p><strong>第二单（第一单交付后启动）：</strong>三方数据互通平台。<mark class="key">金额 64-99万</mark>。需要街道层面协调三方签署数据共享协议。狄鸿在第一单中建立的技术信任，是签这一单的筹码。</p>
+    <p><strong>第三单（选做）：</strong>文体测评 + 健康就业适配打包。<mark class="key">金额 26-41万</mark>。视第一、二单的甲方满意度决定是否推进。</p>
+    <p><strong>年费合同（贯穿全程）：</strong>所有模块上线后，签年度运维合同。<mark class="key">15-23万/年</mark>。现金流最好的一块。</p>
+  </div>
+
+  <h3>3.3 预算来源拆解（帮甲方找钱）</h3>
+  <p>甲方（街道/社康）能从哪里出这个钱？帮他们想清楚，他们才更容易拍板：</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>预算来源</th><th>覆盖场景</th><th>对接部门</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>社康信息化建设经费</strong></td>
+          <td>三方数据互通（社康端对接）、文体健康测评、健康就业适配</td>
+          <td>龙华区卫健局</td>
+        </tr>
+        <tr>
+          <td><strong>街道民生服务数字化经费</strong></td>
+          <td>科普屋、志愿积分、三方互通（党群端模块）</td>
+          <td>景乐街道办</td>
+        </tr>
+        <tr>
+          <td><strong>残联助残专项经费</strong></td>
+          <td>三方互通（助残端系统）、健康就业适配</td>
+          <td>龙华区残联</td>
+        </tr>
+        <tr>
+          <td><strong>鸿蒙生态扶持资金</strong></td>
+          <td>所有涉及鸿蒙设备/技术的部分</td>
+          <td>龙华区工信局/鸿蒙生态专项</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>关键话术：<mark class="key">"一个项目对接四笔预算"</mark>——街道不用全出，每笔预算覆盖一部分，总盘子压力大大降低。</p>
+</section>
+
+<!-- Section 4: 长期价值 -->
+<section>
+  <h2><span class="num">04</span>长期价值：不只是赚一个项目的钱</h2>
+
+  <h3>4.1 标准化复制</h3>
+  <p>景乐社区的三方互通如果做成样板，至少三个模块可以标准化复制到其他社区：</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="icon">PRODUCT LINE 1</div>
+      <h4>健康科普角（标准化产品）</h4>
+      <p>鸿蒙触控一体机+科普游戏包，可以卖给深圳任何一个社康/党群中心。<mark class="key">客单价 15-25万，毛利率 50-60%</mark>。</p>
+    </div>
+    <div class="card">
+      <div class="icon">PRODUCT LINE 2</div>
+      <h4>社区积分管理平台（SaaS）</h4>
+      <p>鸿蒙碰一碰+志愿积分，可以卖给全深圳的党群服务中心。<mark class="key">年费制，3-5万/年/站点</mark>。</p>
+    </div>
+    <div class="card">
+      <div class="icon">PRODUCT LINE 3</div>
+      <h4>社区数据互通平台（项目制）</h4>
+      <p>每做一个社区的数据互通平台，沉淀的都是可复用的组件。第二个项目成本下降30-40%。</p>
+    </div>
+  </div>
+
+  <h3>4.2 与"和联社康全国标杆"的协同</h3>
+  <p>三方互通项目不与标杆冲突，反而<strong>丰富标杆的展示维度</strong>：</p>
+  <ul>
+    <li>标杆的主线是"人口高质量发展基层健康样板"——三方互通恰好展示了健康如何与社会服务（就业、助残、志愿服务）联动</li>
+    <li>科普屋可以作为标杆参观路线中的"互动体验区"</li>
+    <li>三方数据驾驶舱可以作为标杆汇报的"社会健康治理板块"</li>
+    <li>健康就业适配可以作为标杆的"AI+隐私计算+残障赋能"差异化亮点</li>
+  </ul>
+
+  <h3>4.3 给坚哥的判断</h3>
+  <div class="callout">
+    <p>这个项目值得做。<mark class="key">不是因为杨瑶主任的场景有多完美，而是因为这是一个"能快速签单、能标准化复制、能丰富标杆展示、预算来源清晰"的好项目</mark>。</p>
+    <p>正确打法：<strong>科普屋先行签第一单建立信任 → 三方互通签第二单做大金额 → 运营年费锁定长期现金流 → 标准化产品向其他社区复制</strong>。</p>
+    <p>合规风险全部可通过技术设计+合同条款规避，不需要回避任何场景。</p>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div class="container">
+    <p>编制：狄鸿智创产品战略 · 2026年7月2日<br>基于杨瑶主任"三方互通数字健康项目"业务场景的全面商业评估</p>
+  </div>
+</footer>
+
+</body>
+</html>
