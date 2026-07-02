@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>三方互通数字健康项目 — 深度技术分析</title>
+<style>
+:root {
+  --bg: #0f1419;
+  --bg2: #1a2332;
+  --bg3: #243447;
+  --ink: #e8eef5;
+  --muted: #8ba3c7;
+  --rule: #2d4055;
+  --accent: #00d4aa;
+  --accent2: #4a9eff;
+  --warn: #ff8c42;
+  --danger: #ff4757;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, 'PingFang SC', 'Noto Sans CJK SC', 'Microsoft YaHei', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.8;
+  font-size: 16px;
+}
+.container { max-width: 960px; margin: 0 auto; padding: 0 1.5rem; }
+.hero {
+  padding: 4rem 0 3rem;
+  text-align: center;
+  background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
+  border-bottom: 1px solid var(--rule);
+}
+.hero .tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  padding: 2px 10px;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.08em;
+}
+.hero h1 { font-size: 2.2rem; font-weight: 700; line-height: 1.3; margin-bottom: 1rem; }
+.hero .subtitle { font-size: 1.1rem; color: var(--muted); max-width: 680px; margin: 0 auto; }
+section { padding: 2.5rem 0; border-bottom: 1px solid var(--rule); }
+section:last-of-type { border-bottom: none; }
+h2 { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--ink); }
+h2 .num { font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 0.3rem; }
+h3 { font-size: 1.2rem; font-weight: 700; color: var(--accent2); margin: 1.5rem 0 0.75rem; }
+h4 { font-size: 1.05rem; font-weight: 700; color: var(--ink); margin: 1.2rem 0 0.5rem; }
+p { margin-bottom: 1rem; }
+.lead { font-size: 1.05rem; color: var(--muted); margin-bottom: 1.5rem; }
+
+/* Cards */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 1.5rem 0; }
+.card {
+  background: var(--bg2);
+  border-radius: 8px;
+  padding: 1.5rem;
+  border: 1px solid var(--rule);
+}
+.card .icon { font-size: 0.7rem; color: var(--accent); margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+.card h4 { margin: 0 0 0.5rem; font-size: 1.05rem; }
+.card p { font-size: 0.9rem; color: var(--muted); margin: 0; }
+.card .status { display: inline-block; font-size: 0.75rem; padding: 2px 8px; border-radius: 3px; margin-top: 0.75rem; }
+.status.red { background: rgba(255,71,87,0.15); color: var(--danger); border: 1px solid var(--danger); }
+.status.yellow { background: rgba(255,140,66,0.15); color: var(--warn); border: 1px solid var(--warn); }
+.status.green { background: rgba(0,212,170,0.15); color: var(--accent); border: 1px solid var(--accent); }
+
+/* Table */
+.table-wrap { overflow-x: auto; margin: 1.5rem 0; border-radius: 8px; border: 1px solid var(--rule); }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+th { background: var(--bg3); color: var(--accent); font-weight: 700; text-align: left; padding: 0.75rem 1rem; position: sticky; top: 0; white-space: nowrap; }
+td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--rule); color: var(--ink); vertical-align: top; }
+tr:hover td { background: var(--bg2); }
+
+/* Callout */
+.callout {
+  background: var(--bg2);
+  border-left: 4px solid var(--accent2);
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 8px 8px 0;
+}
+.callout.red { border-left-color: var(--danger); }
+.callout.warn { border-left-color: var(--warn); }
+.callout p { margin: 0; }
+.callout p + p { margin-top: 0.5rem; }
+
+/* Lists */
+ul { margin: 1rem 0; padding-left: 1.5rem; }
+li { margin-bottom: 0.5rem; }
+
+mark.key { background: none; color: var(--accent); font-weight: 600; }
+mark.red { background: none; color: var(--danger); font-weight: 600; }
+mark.warn { background: none; color: var(--warn); font-weight: 600; }
+
+strong { color: var(--ink); }
+
+footer { padding: 2rem 0; border-top: 1px solid var(--rule); text-align: center; color: var(--muted); font-size: 0.85rem; }
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 1.7rem; }
+  .card-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="container">
+    <div class="tag">TECHNICAL ANALYSIS · 2026.07.02</div>
+    <h1>三方互通数字健康项目 · 深度技术分析</h1>
+    <p class="subtitle">杨瑶主任业务场景：社康+景乐党群+雨燕助残三方互通数字健康档案系统<br>技术、合规、鸿蒙生态、落地保障四维诊断</p>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- Executive Summary -->
+<div class="callout warn">
+  <p><strong>诊断结论：</strong>杨瑶主任的场景是一个<strong>"社会服务数字化整合"</strong>项目，而非单纯的"医疗信息化"项目。其核心挑战不在于单一技术栈，而在于<mark class="key">跨组织数据治理、多主体权责划分、社会服务与医疗数据合规边界</mark>三个非技术维度。</p>
+  <p>五个业务场景 + 一个科普屋的设计中，<mark class="warn">场景1和场景2触及了合规红线</mark>（健康数据用于就业筛选），场景3/4/5相对独立可快速落地，科普屋是最佳切入点。</p>
+</div>
+
+<!-- Section 1: 技术 -->
+<section>
+  <h2><span class="num">01</span>技术维度："还没整清楚"在哪</h2>
+  <p class="lead">杨瑶文档通篇使用"系统自动""智能匹配""自动推送"等词汇，但缺乏对系统边界、数据流、技术架构的任何定义。以下为逐项拆解。</p>
+
+  <h3>1.1 "三方互通"的技术本质：从数据孤岛到联邦数据层</h3>
+  <p>文档把三方互通描述为"打通三方数据壁垒"，但三方组织的IT基础设施现状决定了互通的技术路径完全不同：</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>组织</th><th>IT现状预判</th><th>数据互通技术路径</th><th>难度</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>和联社康</strong></td>
+          <td>已有龙华家医平台、HIS系统、鸿蒙设备接入</td>
+          <td>API对接或数据中台汇聚，技术基础最好</td>
+          <td style="color:var(--accent)">低</td>
+        </tr>
+        <tr>
+          <td><strong>景乐党群</strong></td>
+          <td>大概率是政务系统或简单的Excel/轻量OA管理</td>
+          <td>需新建数字化模块或对接区级党群系统，数据标准化程度低</td>
+          <td style="color:var(--warn)">高</td>
+        </tr>
+        <tr>
+          <td><strong>雨燕助残</strong></td>
+          <td>NGO/民办非企业，信息系统可能是最薄弱的一环</td>
+          <td>可能需要从零建设移动端+后台管理，数据入口需重建</td>
+          <td style="color:var(--danger)">极高</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout red">
+    <p><strong>关键盲区：</strong>杨瑶文档没有回答一个根本问题——<mark class="key">"互通"是系统级对接，还是数据上报？</mark> 如果是系统级对接，谁提供主系统？如果是数据上报，谁是数据中心？这决定了技术架构的完全不同。</p>
+  </div>
+
+  <h3>1.2 场景级技术拆解：每个"自动"背后缺什么</h3>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="icon">SCENE 01 · 三方数据互通</div>
+      <h4>缺失：主数据管理（MDM）架构</h4>
+      <p>"统一建档"需要跨三方的居民身份唯一标识（自然人主数据）。没有统一ID，同一人在三个系统会被识别为三个不同记录。</p>
+      <span class="status red">关键缺失</span>
+    </div>
+    <div class="card">
+      <div class="icon">SCENE 02 · 健康筛查适配就业</div>
+      <h4>缺失：健康数据-工种匹配模型</h4>
+      <p>"系统智能匹配适配工种"需要：健康指标→劳动能力评估→工种适配的映射规则库。这涉及医学+劳动法的专业规则，不是纯技术问题。</p>
+      <span class="status red">关键缺失</span>
+    </div>
+    <div class="card">
+      <div class="icon">SCENE 03 · 志愿积分联动</div>
+      <h4>缺失：积分账本与兑换结算系统</h4>
+      <p>积分需要防篡改记录（类区块链或强审计日志），兑换涉及社康服务资源的配额管理。谁来提供积分"央行"？</p>
+      <span class="status yellow">中度缺失</span>
+    </div>
+    <div class="card">
+      <div class="icon">SCENE 04 · 文体健康测评</div>
+      <h4>缺失：运动风险评估算法</h4>
+      <p>"心率、关节、慢病线上自测"后生成适配运动方案，需要运动医学知识库+风险分级模型。社康现有能力是否覆盖？</p>
+      <span class="status yellow">中度缺失</span>
+    </div>
+    <div class="card">
+      <div class="icon">SCENE 05 · 健康科普屋</div>
+      <h4>缺失：交互开发 + 内容制作</h4>
+      <p>5个小游戏（刷牙、洗手、护眼、血压、低糖）相对清晰，是H5/小程序可承载的范围。技术路径最明确。</p>
+      <span class="status green">相对清晰</span>
+    </div>
+  </div>
+
+  <h3>1.3 与空间智能体四层架构的对应关系</h3>
+  <p>杨瑶的场景如果要融入我们的"一社一院一家庭"空间智能体框架，各场景对应如下：</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>杨瑶场景</th><th>对应空间智能体能力层</th><th>融合建议</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>场景1：三方数据互通</strong></td>
+          <td>数据融合引擎（IoT平台层）+ 健康档案服务</td>
+          <td>将社康端数据纳入空间智能体数据底座，党群/助残数据作为"社会健康决定因素"（SDH）数据源</td>
+        </tr>
+        <tr>
+          <td><strong>场景2：健康-就业适配</strong></td>
+          <td>AI中台层：规则引擎 + 健康预警智能体</td>
+          <td>在AI中台层增加"就业适配评估"规则模块，但需严格限定数据使用范围</td>
+        </tr>
+        <tr>
+          <td><strong>场景3：志愿积分</strong></td>
+          <td>应用层：积分管理小程序</td>
+          <td>可独立建设为应用层轻量模块，对接空间智能体居民画像</td>
+        </tr>
+        <tr>
+          <td><strong>场景4：文体测评</strong></td>
+          <td>应用层：健康自测小程序</td>
+          <td>科普屋交互游戏可嵌入社康空间智能体大屏，线上线下联动</td>
+        </tr>
+        <tr>
+          <td><strong>场景5：科普屋</strong></td>
+          <td>应用层：数字健康宣教系统</td>
+          <td>最佳切入场景。可作为社康空间智能体的"数字宣教角"快速落地</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Section 2: 合规 -->
+<section>
+  <h2><span class="num">02</span>合规维度：比技术更紧迫的红线</h2>
+  <p class="lead">健康数据跨机构共享、用于就业筛选、残障人士画像——每一条都触及法律红线。杨瑶文档完全没有涉及合规框架，这是最大的风险。</p>
+
+  <h3>2.1 场景2（健康筛查前置就业）是最高风险区</h3>
+  <p>文档描述："雨燕助残开展技能培训前，联动社康做健康筛查，因人定岗，规避用工伤病风险。"</p>
+
+  <div class="callout red">
+    <p><strong>合规风险分析：</strong></p>
+    <p><strong>1. 《个人信息保护法》：</strong>健康信息属于敏感个人信息，处理需单独同意。"联动"共享健康数据给第三方（雨燕助残）用于就业筛选，需要用户的<strong>单独书面同意</strong>，且需明确告知数据接收方、使用目的。文档对此零提及。</p>
+    <p><strong>2. 《残疾人保障法》+《就业促进法》：</strong>因健康筛查结果排除某些工种安排，可能构成<strong>就业歧视</strong>。即使出发点是"保护"，法律上也可能被认定为对残障人士就业权的限制。"因人定岗"若缺乏明确医学标准，极易被挑战。</p>
+    <p><strong>3. 《数据安全法》：</strong>健康数据跨机构流动，需评估数据安全级别。社康数据（公立医疗机构）属于重要数据，向NGO（雨燕助残）传输需要<strong>数据安全评估和合规审查</strong>。</p>
+  </div>
+
+  <h3>2.2 三方数据互通的合规架构必须先行</h3>
+  <p>场景1"打通三方数据壁垒"的合规前提：</p>
+  <ul>
+    <li><strong>数据分类分级：</strong>社康端数据（健康档案、体检数据）vs 党群端数据（就业、社团）vs 助残端数据（技能、康复诉求）——三类数据的敏感度完全不同，不能"一锅端"打通。</li>
+    <li><strong>最小必要原则：</strong>健康数据跨机构共享，必须回答"共享哪些字段、用于什么目的、留存多久"。文档中的"自动同步"过于宽泛。</li>
+    <li><strong>知情同意链：</strong>居民在社康建档时的知情同意，是否覆盖向党群/助残的数据共享？如果没有，需要重新获取同意，否则违法。</li>
+    <li><strong>数据安全责任主体：</strong>如果数据泄露，三方谁来承担法律责任？必须事先明确。</li>
+  </ul>
+
+  <h3>2.3 建议合规框架（先合规再技术）</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>合规动作</th><th>具体内容</th><th>优先级</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>数据共享协议</strong></td>
+          <td>三方签署数据共享协议，明确数据类型、使用范围、安全责任、泄露赔偿机制</td>
+          <td style="color:var(--danger)">P0</td>
+        </tr>
+        <tr>
+          <td><strong>知情同意升级</strong></td>
+          <td>针对健康数据跨机构使用，重新设计知情同意书，逐项列明数据接收方和使用目的</td>
+          <td style="color:var(--danger)">P0</td>
+        </tr>
+        <tr>
+          <td><strong>数据脱敏策略</strong></td>
+          <td>向党群/助残提供的数据必须脱敏（去除姓名、身份证号），用唯一标识符替代</td>
+          <td style="color:var(--warn)">P1</td>
+        </tr>
+        <tr>
+          <td><strong>就业适配法律审查</strong></td>
+          <td>场景2的"因人定岗"机制需经法律顾问审查，确保不构成就业歧视，并有医学标准支撑</td>
+          <td style="color:var(--warn)">P1</td>
+        </tr>
+        <tr>
+          <td><strong>数据安全评估</strong></td>
+          <td>按《数据安全法》要求进行数据出境（跨机构）安全评估，建立数据访问日志和审计</td>
+          <td style="color:var(--warn)">P1</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Section 3: 鸿蒙生态 -->
+<section>
+  <h2><span class="num">03</span>鸿蒙生态：哪些场景可以"鸿蒙化"</h2>
+  <p class="lead">杨瑶的场景没有提鸿蒙，但五个场景中至少有三个可以借助鸿蒙能力获得差异化体验。</p>
+
+  <h3>3.1 可鸿蒙化的场景矩阵</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>场景</th><th>鸿蒙切入点</th><th>价值</th><th>实施难度</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>场景3：志愿积分</strong></td>
+          <td>碰一碰签到（志愿者活动签到）</td>
+          <td>志愿者无需下载App，手机碰一碰完成活动签到，积分自动累计</td>
+          <td style="color:var(--accent)">低</td>
+        </tr>
+        <tr>
+          <td><strong>场景4：文体社团</strong></td>
+          <td>鸿蒙分布式能力（手机+大屏联动）</td>
+          <td>社团活动室大屏实时展示成员健康自测结果，增强互动性</td>
+          <td style="color:var(--accent)">低</td>
+        </tr>
+        <tr>
+          <td><strong>场景5：科普屋</strong></td>
+          <td>鸿蒙平板+分布式游戏引擎</td>
+          <td>科普屋使用鸿蒙平板作为交互终端，一碰即玩，无需登录</td>
+          <td style="color:var(--accent)">低</td>
+        </tr>
+        <tr>
+          <td><strong>场景1：三方互通</strong></td>
+          <td>鸿蒙统一设备接入（分布式软总线）</td>
+          <td>社康、党群、助残三地的设备通过鸿蒙统一接入，数据在本地汇聚后选择性同步</td>
+          <td style="color:var(--warn)">中</td>
+        </tr>
+        <tr>
+          <td><strong>场景2：健康就业适配</strong></td>
+          <td>鸿蒙AI能力（端侧隐私计算）</td>
+          <td>健康筛查数据在端侧完成评估，只输出适配建议，不传输原始健康数据</td>
+          <td style="color:var(--warn)">中</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>3.2 鸿蒙生态为场景2提供的合规解法</h3>
+  <p>场景2最大的合规风险是<strong>健康数据跨机构传输</strong>。鸿蒙的分布式能力+端侧AI可以提供一种"数据不出端"的解法：</p>
+
+  <div class="callout">
+    <p><strong>技术方案：</strong>社康为雨燕助残的学员做健康筛查后，原始健康数据<strong>留在社康端</strong>。通过鸿蒙的分布式AI能力，在社康端完成健康-工种适配评估，<strong>仅输出评估结论（如"建议低强度坐岗"）而非原始健康数据</strong>传输给雨燕助残。</p>
+    <p>这样实现了"健康数据指导就业"的业务目标，同时满足了"敏感数据不出域"的合规要求。</p>
+  </div>
+
+  <h3>3.3 狄耐克/狄鸿智创的角色定位</h3>
+  <p>在杨瑶的三方互通场景中，狄鸿的定位应该是<mark class="key">"技术底座+鸿蒙使能方"</mark>，而非"应用开发商"：</p>
+  <ul>
+    <li><strong>不做：</strong>志愿积分系统的具体业务逻辑、科普游戏的内容开发、党群系统的后台管理</li>
+    <li><strong>做：</strong>提供鸿蒙设备接入底座（碰一碰、平板终端）、数据融合引擎（跨机构数据汇聚）、AI规则引擎（健康评估、运动适配）、安全可信中间件（数据脱敏、访问审计）</li>
+  </ul>
+</section>
+
+<!-- Section 4: 落地保障 -->
+<section>
+  <h2><span class="num">04</span>落地保障：从"想做"到"能做"还差什么</h2>
+  <p class="lead">杨瑶文档描绘了一个完整的业务愿景，但缺乏任何关于"谁来建、谁出钱、谁运营、怎么衡量"的信息。以下是落地保障必须补齐的要素。</p>
+
+  <h3>4.1 组织保障：三方协作机制</h3>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="icon">ORG · 组织结构</div>
+      <h4>联合工作组</h4>
+      <p>建议成立"三方互通数字健康项目联合工作组"，三方各派一名负责人（社康信息科+党群服务中心+雨燕助残理事长），狄鸿作为技术顾问参与。</p>
+      <span class="status yellow">待明确</span>
+    </div>
+    <div class="card">
+      <div class="icon">MONEY · 资金来源</div>
+      <h4>谁出钱？</h4>
+      <p>社康端有医疗信息化预算；党群端有民生服务数字化预算；助残端可能有残联或公益基金支持。但三方互通不是任何一方的单一预算能覆盖的。</p>
+      <span class="status red">待明确</span>
+    </div>
+    <div class="card">
+      <div class="icon">OPERATION · 运营</div>
+      <h4>谁运营？</h4>
+      <p>系统建成后，谁负责日常数据维护、用户支持、积分结算、服务预约？需要明确运营责任主体，否则系统很快就会成为"僵尸系统"。</p>
+      <span class="status red">待明确</span>
+    </div>
+    <div class="card">
+      <div class="icon">KPI · 效果衡量</div>
+      <h4>怎么算成功？</h4>
+      <p>文档没有定义任何可量化的成功指标。需要明确：覆盖多少人、服务多少次、积分兑换率、健康改善指标等KPI。</p>
+      <span class="status red">待明确</span>
+    </div>
+  </div>
+
+  <h3>4.2 实施路径建议（分阶段，不一口吃）</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>阶段</th><th>时间</th><th>内容</th><th>投入</th><th>风险</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Phase 1</strong><br>科普屋先行</td>
+          <td>1-2个月</td>
+          <td>只建设健康科普屋（5个互动游戏），部署在和联社康或党群中心。技术路径最清晰，不涉及跨机构数据，合规风险最低。</td>
+          <td>10-15万</td>
+          <td style="color:var(--accent)">极低</td>
+        </tr>
+        <tr>
+          <td><strong>Phase 2</strong><br>积分+文体</td>
+          <td>3-4个月</td>
+          <td>在科普屋基础上，增加志愿积分系统和文体社团健康自测。开始涉及积分账本和轻量数据同步，但健康数据不跨机构。</td>
+          <td>20-30万</td>
+          <td style="color:var(--accent)">低</td>
+        </tr>
+        <tr>
+          <td><strong>Phase 3</strong><br>数据互通</td>
+          <td>5-6个月</td>
+          <td>在合规框架（数据共享协议、知情同意、脱敏策略）到位的前提下，启动三方数据互通。先试点再推广。</td>
+          <td>30-50万</td>
+          <td style="color:var(--warn)">中</td>
+        </tr>
+        <tr>
+          <td><strong>Phase 4</strong><br>健康就业适配</td>
+          <td>6个月后</td>
+          <td>在法律审查通过、医学标准明确的前提下，上线健康筛查与就业适配功能。这是最高风险场景，放在最后。</td>
+          <td>20-30万</td>
+          <td style="color:var(--danger)">高</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>4.3 给杨瑶主任的具体建议</h3>
+
+  <div class="callout">
+    <p><strong>1. 先整合规，再整技术。</strong>三方数据共享协议和知情同意书必须在任何系统开发之前完成。建议请区卫健局或街道法律顾问参与。</p>
+    <p><strong>2. 科普屋是最好的切入点。</strong>不涉及跨机构数据、不涉及敏感健康信息、可视化效果好、领导参观容易出亮点。建议以此申请第一批预算。</p>
+    <p><strong>3. 明确"谁建谁管"。</strong>三个组织中，社康的技术能力最强，建议由社康作为项目建设牵头方，党群和助残作为数据提供方和使用方。狄鸿提供技术底座。</p>
+    <p><strong>4. 场景2需要重新设计。</strong>"健康筛查前置就业"的表述需要改为"健康建议辅助就业适配"，且必须明确：数据不出社康，只输出建议，用户有选择权。建议请法律顾问重写此场景描述。</p>
+  </div>
+</section>
+
+<!-- Section 5: 综合评估 -->
+<section>
+  <h2><span class="num">05</span>综合评估：与"和联社康全国标杆"的关联</h2>
+  <p class="lead">杨瑶的场景是"标杆"在基层落地的有机组成部分，但不能等同于标杆本身。正确关系是：标杆提供技术和生态底座，杨瑶场景是底座之上的应用创新。</p>
+
+  <h3>5.1 价值定位</h3>
+  <p>杨瑶场景的最大价值在于：<mark class="key">它把"社区健康"从"看病"扩展到了"社会服务整合"</mark>——残障人士就业、骑手健康、宝妈服务、志愿服务。这恰好是"人口高质量发展"中"健康素质"在社会维度的延伸。</p>
+  <p>如果能把杨瑶场景纳入"人口高质量发展基层健康样板"的叙事，将极大丰富标杆的展示维度——不只是"智慧社康"，而是"智慧社区健康生态"。</p>
+
+  <h3>5.2 风险提醒</h3>
+  <p>但有一个关键风险：如果杨瑶场景因为合规问题（尤其是场景2的就业筛查）引发法律纠纷或舆论争议，会反过来损害"全国标杆"的声誉。因此：</p>
+  <ul>
+    <li>杨瑶场景必须作为<mark class="key">"标杆的有机补充"</mark>，而非标杆的"核心组成部分"来定位</li>
+    <li>在对外汇报时，科普屋+志愿积分可以作为亮点展示，但健康就业适配场景应审慎提及</li>
+    <li>狄鸿在技术层面提供支持，但在业务层面保持中立，不介入三方的数据权责争议</li>
+  </ul>
+</section>
+
+</div>
+
+<footer>
+  <div class="container">
+    <p>编制：狄鸿智创产品战略 · 2026年7月2日<br>基于杨瑶主任"三方互通数字健康项目"业务场景文档深度分析</p>
+  </div>
+</footer>
+
+</body>
+</html>
